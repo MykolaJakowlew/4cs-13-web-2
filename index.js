@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const { Comments } = require('./models/comments');
+const movies = require('./api/movies.api');
 
 // process.env
 console.log(`MONGO_DB_URI:${process.env.MONGO_DB_URI}`);
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 
 const setup = async () => {
  await Mongo.setupDb(process.env.MONGO_DB_URI);
+
+ app.use(movies.router);
 
  app.post("/comments", async (req, res) => {
   const { name, email, text } = req.body;
