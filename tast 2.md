@@ -1,6 +1,6 @@
 # Task 2
 
-Git: https://github.com/MykolaJakowlew/4cs-11-part-2/tree/short-links
+Git: https://github.com/MykolaJakowlew/4cs-13-web-2/tree/short-link
 
 Deadline: 14.03
 Здані після цієї дати роботи максмум будуть мати 10 балів
