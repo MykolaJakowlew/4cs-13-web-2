@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd public/ && npm run build",
-    "start:long-polling": "node server/long-polling.js",
-    "start:event-source": "node server/event-source.js",
-    "start:web-socket": "node server/websocket.js"
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
