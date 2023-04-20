@@ -1,18 +1,25 @@
 const express = require('express');
-require('dotenv').config();
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const cors = require('cors');
 
-const { setupConnectionToDb } = require('./setup/mongoose');
+process.addListener('uncaughtException', (err) => {
+ console.error(`[uncaughtException] err:${err.toString()}`, err);
+});
+process.addListener('unhandledRejection', (err) => {
+ console.error(`[unhandledRejection] err:${err.toString()}`, err);
+});
+
+const setupMongoDB = require('./setup/mongoose');
 const API = require('./api');
 
 const app = express();
 
 const bootstrap = async () => {
- app.use(bodyParser);
- app.use(cors);
+ app.use(cors());
+ app.use(bodyParser.json());
 
- await setupConnectionToDb();
+ await setupMongoDB();
 
  app.use(API.router);
 

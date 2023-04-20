@@ -1,11 +1,12 @@
 const { Router } = require('express');
-const { TableHandlers } = require('./handlers');
+const { tables } = require('./handlers');
+const { wrapperApi } = require('../shared/wrapperApi');
 
 const router = Router();
 
-router.post('/tables', TableHandlers.createTable);
-router.get('/tables', TableHandlers.getTables);
-router.delete('/tables/:_id', TableHandlers.deleteTable);
-router.patch('/tables/:_id', TableHandlers.updateTable);
+router.post('/tables', wrapperApi(tables.createTable));
+router.get('/tables', wrapperApi(tables.getTables));
+router.delete('/tables/:_id', wrapperApi(tables.deleteTable));
+router.patch('/tables/:_id', wrapperApi(tables.updateTable));
 
 module.exports = { router };
