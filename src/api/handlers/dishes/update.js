@@ -15,7 +15,7 @@ module.exports.updateDish = async (req, res) => {
  const doc = await Dishes.findOneAndUpdate(
   { _id: Types.ObjectId(_id) },
   { $set: update },
-  { isNew: true }
+  { new: true }
  );
 
  return res.status(200).send(doc);

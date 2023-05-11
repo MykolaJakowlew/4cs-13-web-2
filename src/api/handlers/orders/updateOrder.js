@@ -1,4 +1,4 @@
-const { Types } = require('mongoose');
+const { Types, default: mongoose } = require('mongoose');
 const { Orders, Dishes } = require('../../../models');
 
 module.exports.updateOrder = async (req, res) => {
@@ -8,7 +8,7 @@ module.exports.updateOrder = async (req, res) => {
  const order = await Orders.findOneAndUpdate(
   { _id: Types.ObjectId(_id) },
   { $set: { isOpen } },
-  { isNew: true }
+  { new: true }
  );
 
 
@@ -19,7 +19,7 @@ module.exports.addDishInOrder = async (req, res) => {
  const { dishId, quantity } = req.body;
  const { _id } = req.params;
 
- const doc = await Orders.findOneById(_id);
+ const doc = await Orders.findOne({ _id: new mongoose.Types.ObjectId(_id) });
  if (!doc) {
   return res.status(400).send({
    message: `Order with id:${_id} was not found`
@@ -62,7 +62,7 @@ module.exports.addDishInOrder = async (req, res) => {
     }
    }
   },
-  { isNew: true }
+  { new: true }
  );
 
  return res.status(200).send(order);
@@ -72,7 +72,7 @@ module.exports.removeDishFromOrder = async (req, res) => {
  const { dishId, dec } = req.body;
  const { _id } = req.params;
 
- const doc = await Orders.findOneById(_id);
+ const doc = await Orders.findOne({ _id: new mongoose.Types.ObjectId(_id) });
  if (!doc) {
   return res.status(400).send({
    message: `Order with id:${_id} was not found`
@@ -124,7 +124,7 @@ module.exports.removeDishFromOrder = async (req, res) => {
  const order = await Orders.findOneAndUpdate(
   { _id: Types.ObjectId(_id) },
   { $set: { dishes: newDishes } },
-  { isNew: true }
+  { new: true }
  );
 
  return res.status(200).send(order);

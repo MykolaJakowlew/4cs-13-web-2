@@ -1,4 +1,5 @@
 const { Orders } = require('../../../models');
+const mongoose = require('mongoose');
 
 module.exports.getOrders = async (req, res) => {
  const { isOpen } = req.query;
@@ -18,7 +19,7 @@ module.exports.getOrders = async (req, res) => {
 module.exports.getOrder = async (req, res) => {
  const { _id } = req.params;
 
- const order = await Orders.findOneById(_id);
+ const order = await Orders.findOne({ _id: new mongoose.Types.ObjectId(_id) });
  if (!order) {
   return res.status(400).send({
    message: `Order with id:${_id} was not found`

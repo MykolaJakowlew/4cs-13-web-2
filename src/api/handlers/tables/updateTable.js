@@ -21,7 +21,7 @@ module.exports.updateTable = async (req, res) => {
  }
 
  if (waiterId) {
-  const waiter = await Waiters.findOneById(waiterId);
+  const waiter = await Waiters.findOne({ _id: new mongoose.Types.ObjectId(waiterId) });
   if (!waiter) {
    return res.status(400).send({
     message: `Waiter by id ${waiterId} was not found`
@@ -44,7 +44,7 @@ module.exports.updateTable = async (req, res) => {
  const doc = await Tables.findOneAndUpdate(
   { _id: mongoose.Types.ObjectId(_id) },
   { $set: update },
-  { isNew: true }
+  { new: true }
  );
 
  return res.status(200).send(doc);

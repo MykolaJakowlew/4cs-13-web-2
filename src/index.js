@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const cors = require('cors');
+const path = require('path');
 
 process.addListener('uncaughtException', (err) => {
  console.error(`[uncaughtException] err:${err.toString()}`, err);
@@ -16,6 +17,7 @@ const API = require('./api');
 const app = express();
 
 const bootstrap = async () => {
+ app.use(express.static(path.join(__dirname, '../public/dist')));
  app.use(cors());
  app.use(bodyParser.json());
 
