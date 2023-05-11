@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "cd public/ && npm run build",
     "start": "node src/index.js",
+    "start:react": "react-scripts start",
     "test": "jest"
   },
   "author": "",
